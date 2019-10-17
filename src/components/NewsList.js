@@ -5,24 +5,26 @@ import { API_KEY } from 'react-native-dotenv'
 
 @inject('newsStore')
 @observer
-export default class NewsList {
+export default class NewsList extends Component {
   constructor(props) {
+    super(props)
     this.state = {
-      country: 'us',
-      endpoint: 'https://newsapi.org/v2/top-headlines'
+      country: 'us'
     }
 
   }
 
-  componentDidMount() {
-    fetch(this.state.endpoint, {
-      method: 'GET',
-      body: JSON.stringify({
-        country: this.state.country,
-        apiKey: API_KEY
-
-      })
-    }).then(res => res.json()).then(response => console.log(response))
+  async componentDidMount() {
+    const { country } = this.state
+    const { newsStore } = this.props
+    const endpoint = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${API_KEY}`
+    let response = await fetch(endpoint, {
+      method: 'GET'
+    }).then(res => res.json())
+    console.log(response)
+    await response.articles.map(article => {
+      newsStore.addArticle(article)
+    })
   }
 
   render() {
