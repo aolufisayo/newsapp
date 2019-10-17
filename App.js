@@ -13,13 +13,17 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import { Provider } from 'mobx-react'
+import NewsStore from './src/store/newsStore';
 
-
+const newsStore = new NewsStore()
 const App = () => {
   return (
     <>
       <View style={styles.container}>
-        <Text>News Reading Application built with react-native</Text>
+        <Provider newsStore={newsStore}>
+          <Text>News Reading Application built with react-native</Text>
+        </Provider>
       </View>
     </>
   );
@@ -27,9 +31,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    flex: 1
   }
 });
 
