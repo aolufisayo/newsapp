@@ -1,0 +1,1 @@
+## news reading application built with react-native and powered by www.newsapi.org
