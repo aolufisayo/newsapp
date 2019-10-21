@@ -8,10 +8,10 @@ export default class Article extends Component {
     super(props)
   }
   render() {
-    const { article } = this.props
+    const { article, navigation } = this.props
     return (
       <Container>
-        <TouchableOpacity onPress={() => { }}>
+        <TouchableOpacity onPress={() => { navigation.navigate('Details', { article }) }}>
           <Cover>
 
             <CaptionText>{article.title}</CaptionText>

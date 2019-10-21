@@ -34,7 +34,7 @@ export default class NewsList extends Component {
       <ScrollView>
         {
           articles.map((article, index) => (
-            <Article key={index} article={article} style={{ elevation: 10 }} />
+            <Article key={index} article={article} style={{ elevation: 10 }} navigation={this.props.navigation} />
           ))
         }
       </ScrollView>
