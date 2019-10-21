@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import { observer, inject } from 'mobx-react'
+import styled from 'styled-components'
 import { API_KEY } from 'react-native-dotenv'
+import Article from './Article';
 
 @inject('newsStore')
 @observer
@@ -21,17 +23,24 @@ export default class NewsList extends Component {
     let response = await fetch(endpoint, {
       method: 'GET'
     }).then(res => res.json())
-    console.log(response)
     await response.articles.map(article => {
       newsStore.addArticle(article)
     })
   }
 
   render() {
+    const { articles } = this.props.newsStore
     return (
-      <View>
-        <Text>Newlist component</Text>
-      </View>
+      <ScrollView>
+        {
+          articles.map((article, index) => (
+            <Article key={index} article={article} style={{ elevation: 10 }} />
+          ))
+        }
+      </ScrollView>
+
     )
   }
 }
+
+

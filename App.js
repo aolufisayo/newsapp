@@ -23,7 +23,6 @@ const App = () => {
     <>
       <View style={styles.container}>
         <Provider newsStore={newsStore}>
-          <Text>News Reading Application built with react-native</Text>
           <NewsList />
         </Provider>
       </View>
