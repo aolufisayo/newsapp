@@ -24,7 +24,7 @@ describe('News Store', () => {
         "content": "Most genetic variants that contribute to disease1 are challenging to correct efficiently and without excess byproducts25. Here we describe prime editing, a versatile and precise genome editing method that directly writes new genetic information into a specifi… [+1265 chars]"
       }
       const newsStore = new NewsStore()
-      newsStore.addArticle(articles)
+      newsStore.addArticle(article)
       expect(newsStore.articles).toHaveLength(1)
     })
   })
