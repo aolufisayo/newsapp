@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { Provider } from 'mobx-react'
 import { createAppContainer } from 'react-navigation'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import NewsStore from './src/store/newsStore';
 import NewsList from './src/components/NewsList';
@@ -22,7 +23,7 @@ import NewsDetail from './src/components/NewsDetail';
 
 const newsStore = new NewsStore()
 
-const rootStack = createStackNavigator({
+const HomeStack = createStackNavigator({
   Home: {
     screen: NewsList
   },
@@ -32,6 +33,10 @@ const rootStack = createStackNavigator({
 }, {
     initialRouteName: 'Home'
   })
+
+const rootStack = createBottomTabNavigator({
+  HomeStack
+})
 
 const RootStack = createAppContainer(rootStack)
 
