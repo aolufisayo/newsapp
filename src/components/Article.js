@@ -43,6 +43,7 @@ const Cover = styled.View`
     background: #FFFFFF;
     margin-right: 16;
     margin-left: 16;
+    overflow: hidden;
 `
 
 const Subtitle = styled.View`
@@ -81,4 +82,6 @@ const PostImage = styled.Image`
     position: absolute;
     bottom: 0;
     left: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 `

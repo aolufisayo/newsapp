@@ -21,7 +21,6 @@ import NewsStore from './src/store/newsStore';
 import NewsList from './src/components/NewsList';
 import NewsDetail from './src/components/NewsDetail';
 import TabBarIcon from './src/navigation/components/TabBarIcon';
-import Search from './src/components/Search';
 import Bookmarks from './src/components/Bookmarks';
 import Settings from './src/components/Settings';
 
@@ -44,14 +43,6 @@ HomeStack.navigationOptions = ({ navigation }) => ({
   )
 })
 
-const SearchStack = createStackNavigator({
-  Search
-})
-SearchStack.navigationOptions = ({ navigation }) => ({
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon name="cloud-search" focused={focused} color={focused ? "#F71735" : "#000"} />
-  )
-})
 
 const BookmarkStack = createStackNavigator({
   Bookmarks
@@ -73,7 +64,6 @@ SettingStack.navigationOptions = ({ navigation }) => ({
 
 const rootStack = createBottomTabNavigator({
   HomeStack,
-  SearchStack,
   BookmarkStack,
   SettingStack
 }, {
@@ -98,7 +88,8 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#f0f3f5'
   }
 });
 

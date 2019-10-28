@@ -12,7 +12,7 @@ import renderer from 'react-test-renderer';
 describe('Render App', () => {
   it('renders correctly', () => {
     const wrapper = renderer.create(<App />).toJSON();
-    expect(wrapper).toBeTruthy()
+    expect(wrapper).toMatchSnapshot()
   });
 })
 
