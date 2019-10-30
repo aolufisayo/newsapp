@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, Text, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
 import { observer, inject } from 'mobx-react'
 import styled from 'styled-components'
 import { API_KEY } from 'react-native-dotenv'
 import Article from './Article';
 
-@inject('newsStore')
+@inject('rootStore')
 @observer
-export default class NewsList extends Component {
+export default class NewsList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -23,21 +23,21 @@ export default class NewsList extends Component {
 
   async getData() {
     const { country } = this.state
-    const { newsStore } = this.props
+    const { rootStore } = this.props
     const endpoint = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${API_KEY}`
     this.setState({ refreshing: true })
     let response = await fetch(endpoint, {
       method: 'GET'
     }).then(res => res.json())
     await response.articles.map(article => {
-      newsStore.addArticle(article)
+      rootStore.newsStore.addArticle(article)
     })
     this.setState({ refreshing: false })
   }
 
   render() {
     const { refreshing } = this.state
-    const { articles } = this.props.newsStore
+    const { articles } = this.props.rootStore.newsStore
 
     const onRefresh = () => {
       this.getData()

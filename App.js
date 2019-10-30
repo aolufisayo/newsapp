@@ -17,14 +17,15 @@ import { Provider } from 'mobx-react'
 import { createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
-import NewsStore from './src/store/newsStore';
+//import NewsStore from './src/store/newsStore';
 import NewsList from './src/components/NewsList';
 import NewsDetail from './src/components/NewsDetail';
 import TabBarIcon from './src/navigation/components/TabBarIcon';
 import Bookmarks from './src/components/Bookmarks';
 import Settings from './src/components/Settings';
+import RootStore from './src/store/rootStore';
 
-const newsStore = new NewsStore()
+const rootStore = new RootStore()
 
 const HomeStack = createStackNavigator({
   Home: {
@@ -39,7 +40,7 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon name={focused ? "home" : "home-outline"} focused={focused} color={focused ? "#F71735" : "#000"} />
+    <TabBarIcon name={focused ? "home" : "home-outline"} focused={focused} color={focused ? "#F71735" : "#000"} size={26} />
   )
 })
 
@@ -49,7 +50,7 @@ const BookmarkStack = createStackNavigator({
 })
 BookmarkStack.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon name={focused ? "bookmark" : "bookmark-outline"} focused={focused} color={focused ? "#F71735" : "#000"} />
+    <TabBarIcon name={focused ? "bookmark" : "bookmark-outline"} focused={focused} color={focused ? "#F71735" : "#000"} size={26} />
   )
 })
 
@@ -58,7 +59,7 @@ const SettingStack = createStackNavigator({
 })
 SettingStack.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon name={focused ? "settings" : "settings-outline"} focused={focused} color={focused ? "#F71735" : "#000"} />
+    <TabBarIcon name={focused ? "settings" : "settings-outline"} focused={focused} color={focused ? "#F71735" : "#000"} size={26} />
   )
 })
 
@@ -78,7 +79,11 @@ const App = () => {
   return (
     <>
       <View style={styles.container}>
-        <Provider newsStore={newsStore}>
+        <Provider
+          rootStore={rootStore}
+          newsStore={rootStore.newsStore}
+          bookmarkStore={rootStore.bookmarkStore}
+        >
           <RootStack />
         </Provider>
       </View>

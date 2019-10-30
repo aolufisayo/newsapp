@@ -6,7 +6,7 @@ const TabBarIcon = (props) => {
   return (
     <Icon
       name={props.name}
-      size={26}
+      size={props.size}
       style={{ marginBottom: -3 }}
       color={props.color}
     />
