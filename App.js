@@ -17,15 +17,25 @@ import { Provider } from 'mobx-react'
 import { createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
-//import NewsStore from './src/store/newsStore';
+import { create } from 'mobx-persist'
+import AsyncStorage from '@react-native-community/async-storage';
 import NewsList from './src/components/NewsList';
 import NewsDetail from './src/components/NewsDetail';
 import TabBarIcon from './src/navigation/components/TabBarIcon';
 import Bookmarks from './src/components/Bookmarks';
 import Settings from './src/components/Settings';
 import RootStore from './src/store/rootStore';
+import BookmarkStore from './src/store/bookmarkStore';
 
 const rootStore = new RootStore()
+
+const hydrate = create({
+  storage: AsyncStorage,
+  jsonify: true
+})
+
+const newBookmarkStore = new BookmarkStore()
+hydrate('@news-app-bookmarks', newBookmarkStore).then(() => console.log("bookmark store have been hydrated"))
 
 const HomeStack = createStackNavigator({
   Home: {

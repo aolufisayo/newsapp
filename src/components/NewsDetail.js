@@ -36,7 +36,7 @@ export default class NewsDetail extends React.Component {
 
         <TouchableWithoutFeedback onPress={() => this.handleBookmark(article)}>
           <View style={{ position: 'absolute', right: 10, zIndex: 100, bottom: 10 }}>
-            <TabBarIcon size={36} name={pressed ? "bookmark" : "bookmark-outline"} color={pressed ? "#F71735" : "#000"} />
+            <TabBarIcon size={36} name={pressed ? "bookmark" : "bookmark-outline"} color="#F71735" />
           </View>
         </TouchableWithoutFeedback>
 

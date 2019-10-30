@@ -1,7 +1,8 @@
 import { observable } from 'mobx'
+import { persist } from 'mobx-persist'
 
 export default class BookmarkStore {
-  @observable bookmarks = []
+  @persist('list') @observable bookmarks = []
 
   constructor(rootStore) {
     this.rootStore = rootStore
