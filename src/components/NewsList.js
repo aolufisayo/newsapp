@@ -11,7 +11,6 @@ export default class NewsList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      country: 'us',
       refreshing: false
     }
 
@@ -22,9 +21,9 @@ export default class NewsList extends React.Component {
   }
 
   async getData() {
-    const { country } = this.state
+    const { selectedCountry } = this.props.rootStore.newsStore
     const { rootStore } = this.props
-    const endpoint = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${API_KEY}`
+    const endpoint = `https://newsapi.org/v2/top-headlines?country=${selectedCountry}&apiKey=${API_KEY}`
     this.setState({ refreshing: true })
     let response = await fetch(endpoint, {
       method: 'GET'

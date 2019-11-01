@@ -14,4 +14,8 @@ export default class BookmarkStore {
   getBookmarks = () => {
     return this.bookmarks;
   }
+
+  removeBookmark = (bookmarkedArticle) => {
+    this.bookmarks.filter(article => article != bookmarkedArticle)
+  }
 }
