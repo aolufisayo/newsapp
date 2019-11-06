@@ -15,7 +15,6 @@ export default class Bookmarks extends Component {
 
   render() {
     const result = this.props.rootStore.bookmarkStore.getBookmarks()
-    console.log("from mobx bookmasrk store", result)
     return (
       <ScrollView>
         {

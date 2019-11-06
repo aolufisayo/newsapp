@@ -8,7 +8,11 @@ export default class BookmarkStore {
     this.rootStore = rootStore
   }
   addBookmark = (item) => {
-    this.bookmarks.push(item)
+    if (this.bookmarks.includes(item)) {
+      return;
+    } else {
+      this.bookmarks.push(item)
+    }
   }
 
   getBookmarks = () => {
@@ -16,6 +20,6 @@ export default class BookmarkStore {
   }
 
   removeBookmark = (bookmarkedArticle) => {
-    this.bookmarks.filter(article => article != bookmarkedArticle)
+    this.bookmarks.filter(article => article.title !== bookmarkedArticle.title)
   }
 }

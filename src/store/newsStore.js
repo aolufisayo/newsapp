@@ -3,7 +3,7 @@ import RecentNews from './recentNews';
 
 export default class NewsStore {
   @observable articles = []
-  @observable selectedCountry = 'us'
+  @observable selectedCountry = 'gb'
 
   constructor(rootStore) {
     this.rootStore = rootStore

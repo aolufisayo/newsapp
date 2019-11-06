@@ -18,9 +18,16 @@ export default class NewsDetail extends React.Component {
 
 
   handleBookmark = (article) => {
+    console.log("the article object passed in", article)
     this.setState({ pressed: !this.state.pressed })
-    console.log("article was passed in handleBookmark method");
-    this.props.rootStore.bookmarkStore.addBookmark(article)
+
+    if (!this.state.pressed) {
+      //console.log("article was passed in handleBookmark method");
+      this.props.rootStore.bookmarkStore.addBookmark(article)
+    }
+    //console.log("article was removed from bookmark store");
+    this.props.rootStore.bookmarkStore.removeBookmark(article)
+
   }
 
 

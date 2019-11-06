@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
 import { observer, inject } from 'mobx-react'
+import { autorun } from 'mobx'
 import styled from 'styled-components'
+import { getData } from '../utils/fetchData'
 import { API_KEY } from 'react-native-dotenv'
 import Article from './Article';
 
 @inject('rootStore')
 @observer
 export default class NewsList extends React.Component {
+  _mounted = false;
   constructor(props) {
     super(props)
     this.state = {
@@ -16,30 +19,33 @@ export default class NewsList extends React.Component {
 
   }
 
-  componentDidMount() {
-    this.getData()
-  }
-
-  async getData() {
-    const { selectedCountry } = this.props.rootStore.newsStore
+  async componentDidMount() {
     const { rootStore } = this.props
-    const endpoint = `https://newsapi.org/v2/top-headlines?country=${selectedCountry}&apiKey=${API_KEY}`
+    const { selectedCountry } = this.props.rootStore.newsStore;
     this.setState({ refreshing: true })
-    let response = await fetch(endpoint, {
-      method: 'GET'
-    }).then(res => res.json())
-    await response.articles.map(article => {
-      rootStore.newsStore.addArticle(article)
-    })
+    await getData(selectedCountry, rootStore)
     this.setState({ refreshing: false })
   }
+
+  componentWillUnmount() {
+    this._mounted = false
+  }
+
+  reaction = autorun(() => {
+    const { rootStore } = this.props;
+    const { selectedCountry } = this.props.rootStore.newsStore;
+    console.log("selected country has changed", selectedCountry)
+    getData(selectedCountry, rootStore)
+  })
 
   render() {
     const { refreshing } = this.state
     const { articles } = this.props.rootStore.newsStore
 
-    const onRefresh = () => {
-      this.getData()
+    const onRefresh = async () => {
+      const { rootStore } = this.props
+      const { selectedCountry } = this.props.rootStore.newsStore;
+      await getData(selectedCountry, rootStore)
     }
     return (
       <ScrollView
@@ -47,7 +53,7 @@ export default class NewsList extends React.Component {
       >
         {
           articles.map((article, index) => (
-            <Article key={index} article={article} style={{ elevation: 10 }} navigation={this.props.navigation} />
+            <Article key={"article " + index} article={article} style={{ elevation: 10 }} navigation={this.props.navigation} />
           ))
         }
       </ScrollView>

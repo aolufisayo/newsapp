@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Picker, Text } from 'react-native'
+import { View, Picker, Text, Button } from 'react-native'
 import { inject, observer } from 'mobx-react'
+import { getData } from '../utils/fetchData'
 
 @inject('rootStore')
 @observer
@@ -63,20 +64,23 @@ export default class Settings extends Component {
         { name: 'United Kingdom', code: 'gb' },
         { name: 'United States', code: 'us' },
         { name: 'Venezuela', code: 've' }
-      ],
-      selectedCountry: ''
+      ]
     }
   }
+
+
+
   render() {
     const { countryList } = this.state;
-    const { chooseCountry, selectedCountry } = this.props.rootStore.newsStore
+    const { rootStore } = this.props;
+    const { selectedCountry, chooseCountry } = this.props.rootStore.newsStore
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Choose Country:</Text>
         <Picker
           selectedValue={selectedCountry}
           style={{ height: 50, width: 300 }}
-          onValueChange={(itemValue, itemIndex) => chooseCountry(itemValue)}
+          onValueChange={(itemValue) => chooseCountry(itemValue)}
         >
           {
             countryList.map(country => (
@@ -84,6 +88,7 @@ export default class Settings extends Component {
             ))
           }
         </Picker>
+        <Button title="Set Country" onPress={async () => await getData(selectedCountry, rootStore)} />
       </View>
     )
   }

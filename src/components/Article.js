@@ -50,7 +50,6 @@ const Cover = styled.View`
 `
 
 const Subtitle = styled.View`
-    width: 85px;
     height: 25px;
     position: absolute;
     margin-left: 10px;
@@ -77,6 +76,8 @@ const CaptionText = styled.Text`
     text-align: left;
     font-weight: 400;
     color: #333333;
+    padding-left: 5px;
+    padding-right: 5px;
 `
 
 const PostImage = styled.Image`
