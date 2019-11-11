@@ -11,8 +11,6 @@ export default class Bookmarks extends Component {
     super(props)
   }
 
-
-
   render() {
     const result = this.props.rootStore.bookmarkStore.getBookmarks()
     return (

@@ -11,7 +11,7 @@ export default class Article extends Component {
     const { article, navigation } = this.props
     return (
       <Container>
-        <TouchableWithoutFeedback onPress={() => { navigation.navigate('Details', { article }) }}>
+        <TouchableWithoutFeedback onPress={() => { navigation.state.routeName === 'Home' ? navigation.navigate('Details', { article }) : navigation.navigate('BookmarkDetails', { article }) }}>
           <Cover style={{ elevation: 20 }}>
 
             <CaptionText>{article.title}</CaptionText>

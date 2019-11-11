@@ -46,8 +46,15 @@ HomeStack.navigationOptions = ({ navigation }) => ({
 
 
 const BookmarkStack = createStackNavigator({
-  Bookmarks
-})
+  Bookmarks: {
+    screen: Bookmarks
+  },
+  BookmarkDetails: {
+    screen: NewsDetail
+  }
+}, {
+    initialRouteName: 'Bookmarks'
+  })
 BookmarkStack.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused }) => (
     <TabBarIcon name={focused ? "bookmark" : "bookmark-outline"} focused={focused} color={focused ? "#F71735" : "#000"} size={26} />

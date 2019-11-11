@@ -17,8 +17,9 @@ export default class NewsDetail extends React.Component {
   }
 
 
-  handleBookmark = (article) => {
-    console.log("the article object passed in", article)
+  handleBookmark = (article, event) => {
+    //console.log("the article object passed in", article)
+    //console.log(event)
     this.setState({ pressed: !this.state.pressed })
 
     if (!this.state.pressed) {
@@ -41,9 +42,9 @@ export default class NewsDetail extends React.Component {
           source={{ uri: article.url }}
         />
 
-        <TouchableWithoutFeedback onPress={() => this.handleBookmark(article)}>
+        <TouchableWithoutFeedback onPress={(event) => this.handleBookmark(article, event)}>
           <View style={{ position: 'absolute', right: 10, zIndex: 100, bottom: 10 }}>
-            <TabBarIcon size={36} name={pressed ? "bookmark" : "bookmark-outline"} color="#F71735" />
+            <TabBarIcon size={36} name="bookmark" color={pressed ? "#F71735" : "#000"} />
           </View>
         </TouchableWithoutFeedback>
 

@@ -11,7 +11,7 @@ export default class BookmarkStore {
     if (this.bookmarks.includes(item)) {
       return;
     } else {
-      this.bookmarks.push(item)
+      this.bookmarks.unshift(item)
     }
   }
 
@@ -20,6 +20,7 @@ export default class BookmarkStore {
   }
 
   removeBookmark = (bookmarkedArticle) => {
-    this.bookmarks.filter(article => article.title !== bookmarkedArticle.title)
+    const data = this.bookmarks.filter(article => article.title !== bookmarkedArticle.title)
+    console.log(data);
   }
 }
