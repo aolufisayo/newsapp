@@ -29,6 +29,7 @@ export default class NewsStore {
       await data.articles.map(article => {
         this.addArticle(article)
       })
+      this.refreshing = false;
 
     } catch (error) {
 

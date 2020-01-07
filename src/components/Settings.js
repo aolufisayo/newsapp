@@ -72,7 +72,11 @@ export default class Settings extends Component {
 
   render() {
     const { countryList } = this.state;
-    const { selectedCountry, chooseCountry, fetchHeadlines } = this.props.rootStore.newsStore
+    const { selectedCountry, chooseCountry, fetchHeadlines } = this.props.rootStore.newsStore;
+    const selectAndNavigate = () => {
+      fetchHeadlines();
+      this.props.navigation.navigate("Home")
+    }
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Choose Country:</Text>
@@ -87,7 +91,7 @@ export default class Settings extends Component {
             ))
           }
         </Picker>
-        <Button title="Set Country" onPress={() => fetchHeadlines()} />
+        <Button title="Set Country" onPress={() => selectAndNavigate()} />
       </View>
     )
   }

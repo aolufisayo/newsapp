@@ -8,40 +8,37 @@ export default class Article extends Component {
     super(props)
   }
   render() {
-    const { article, navigation } = this.props
+    const { article, navigation, cardWidth } = this.props
     return (
-      <Container>
-        <TouchableWithoutFeedback onPress={() => { navigation.state.routeName === 'Home' ? navigation.navigate('Details', { article }) : navigation.navigate('BookmarkDetails', { article }) }}>
-          <Cover style={{ elevation: 20 }}>
+      <>
+        <Container style={{ width: cardWidth }}>
+          <TouchableWithoutFeedback onPress={() => { navigation.state.routeName === 'Home' ? navigation.navigate('Details', { article }) : navigation.navigate('BookmarkDetails', { article }) }}>
+            <Cover style={{ elevation: 20 }}>
 
-            <CaptionText>{article.title}</CaptionText>
+              <CaptionText>{article.title}</CaptionText>
 
-            <PostImage source={article.urlToImage ? { uri: article.urlToImage } : null} />
-            <Subtitle>
-              <SubtitleText>{article.source.name}</SubtitleText>
-            </Subtitle>
-
-          </Cover>
-        </TouchableWithoutFeedback>
-        <Horizontal />
-      </Container>
+              <PostImage source={article.urlToImage ? { uri: article.urlToImage } : null} />
+              <Subtitle>
+                <SubtitleText>{article.source.name}</SubtitleText>
+              </Subtitle>
+            </Cover>
+          </TouchableWithoutFeedback>
+          <Horizontal />
+        </Container>
+      </>
     )
   }
 }
 
 const Container = styled.View`
-    justify-content: center;
-    align-items: center;
-    margin-top: 25.5px;
-    
-`;
 
+`
 const Cover = styled.View`
-    width: 343px;
+    margin-top: 25.5px;
     height: 245px;
     background: #FFFFFF;
-    margin-right: 16px;
-    margin-left: 16px;
+    margin-right: 20px;
+    margin-left: 20px;
     overflow: hidden;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -61,8 +58,8 @@ const Horizontal = styled.View`
     border-bottom-width: 0.5;
     margin-top: 25.5px;
     width: 343px;
-    margin-left: 16px;
-    margin-right: 16px;
+    margin-left: 20px;
+    margin-right: 20px;
 `
 
 const SubtitleText = styled.Text`

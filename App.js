@@ -9,9 +9,7 @@
 import React from 'react';
 import {
   StyleSheet,
-  View,
-  Text,
-  StatusBar,
+  View
 } from 'react-native';
 import { Provider } from 'mobx-react'
 import { createAppContainer } from 'react-navigation'
@@ -20,7 +18,6 @@ import { createStackNavigator } from 'react-navigation-stack'
 import NewsList from './src/components/NewsList';
 import NewsDetail from './src/components/NewsDetail';
 import TabBarIcon from './src/navigation/components/TabBarIcon';
-import Bookmarks from './src/components/Bookmarks';
 import Settings from './src/components/Settings';
 import RootStore from './src/store/rootStore';
 
@@ -45,22 +42,6 @@ HomeStack.navigationOptions = ({ navigation }) => ({
 })
 
 
-const BookmarkStack = createStackNavigator({
-  Bookmarks: {
-    screen: Bookmarks
-  },
-  BookmarkDetails: {
-    screen: NewsDetail
-  }
-}, {
-    initialRouteName: 'Bookmarks'
-  })
-BookmarkStack.navigationOptions = ({ navigation }) => ({
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon name={focused ? "bookmark" : "bookmark-outline"} focused={focused} color={focused ? "#F71735" : "#000"} size={26} />
-  )
-})
-
 const SettingStack = createStackNavigator({
   Settings
 })
@@ -72,7 +53,6 @@ SettingStack.navigationOptions = ({ navigation }) => ({
 
 const rootStack = createBottomTabNavigator({
   HomeStack,
-  BookmarkStack,
   SettingStack
 }, {
     tabBarOptions: {
@@ -89,7 +69,7 @@ const App = () => {
         <Provider
           rootStore={rootStore}
           newsStore={rootStore.newsStore}
-          bookmarkStore={rootStore.bookmarkStore}
+
         >
           <RootStack />
         </Provider>
