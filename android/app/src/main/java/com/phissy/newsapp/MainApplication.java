@@ -1,4 +1,4 @@
-package com.newsapp;
+package com.phissy.newsapp;
 
 import android.app.Application;
 import android.content.Context;

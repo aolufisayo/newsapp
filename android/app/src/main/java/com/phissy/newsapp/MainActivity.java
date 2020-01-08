@@ -1,4 +1,4 @@
-package com.newsapp;
+package com.phissy.newsapp;
 
 import com.facebook.react.ReactActivity;
 
